@@ -61,7 +61,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.example.EnterDataWebApp.MainApplication</mainClass>
+              <mainClass>org.example.App</mainClass>
             </manifest>
           </archive>
         </configuration>
