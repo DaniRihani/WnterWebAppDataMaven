@@ -46,18 +46,18 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  deploy:
-    needs: [build-and-push]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to server
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
-            docker stop existing_container || true
-            docker rm existing_container || true
-            docker run -d -p 8080:8080 --name myapp ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+  # deploy:
+  #   needs: [build-and-push]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy to server
+  #       uses: appleboy/ssh-action@v0.1.10
+  #       with:
+  #         host: ${{ secrets.SSH_HOST }}
+  #         username: ${{ secrets.SSH_USERNAME }}
+  #         key: ${{ secrets.SSH_KEY }}
+  #         script: |
+  #           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+  #           docker stop existing_container || true
+  #           docker rm existing_container || true
+  #           docker run -d -p 8080:8080 --name myapp ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
